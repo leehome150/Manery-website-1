@@ -1,26 +1,26 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import Money from "@/views/Money.vue";
-import Labels from "@/views/Labels.vue";
-import Statistics from "@/views/Statistics.vue";
+import Vue from 'vue';
+import VueRouter, {RouteConfig} from 'vue-router';
+import Labels from '@/views/Labels.vue';
+import Statistics from '@/views/Statistics.vue';
+import Money from '@/views/Money.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
-    redirect: "/money",
+    path: '/',
+    redirect: '/money',
   },
   {
-    path: "/money",
+    path: '/money',
     component: Money,
   },
   {
-    path: "/labels",
+    path: '/labels',
     component: Labels,
   },
   {
-    path: "/statistics",
+    path: '/statistics',
     component: Statistics,
   },
 ];

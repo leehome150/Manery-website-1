@@ -1,9 +1,12 @@
 <template>
-  <div>Labels.vue</div>
+  <div>Labels.vue
+  <Nav/>
+  </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+export default {
+};
 </script>
 
 <style lang="scss" scoped>
