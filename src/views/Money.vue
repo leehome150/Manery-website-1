@@ -14,21 +14,16 @@
   import Notes from '@/components/Money/Notes.vue';
   import Tags from '@/components/Money/Tags.vue';
   import {Component, Watch} from 'vue-property-decorator';
+  import model from '@/model';
 
-  type Record = {
-    tags: string[];
-    notes: string;
-    type: string;
-    amount: number;
-    createAt?: Date;//类
-  }
+
 
   @Component({components: {Tags, Notes, Types, NumberPad}})
   export default class Money extends Vue {
 
     tags = ['衣', '食', '住', '行', '娱乐'];
-    recodeList: Record[] = JSON.parse(window.localStorage.getItem('recodeList') || '[]');
-    recode: Record = {
+    recodeList = model.fetch();
+    recode: RecordItem = {
       tags: [], notes: '', type: '-', amount: 0
     };
 
@@ -45,14 +40,14 @@
     }
 
     saveRecode() {
-      const recode2: Record = JSON.parse(JSON.stringify(this.recode));
+      const recode2: RecordItem = model.clone(this.recode);
       recode2.createAt = new Date();
       this.recodeList.push(recode2);
     }
 
     @Watch('recodeList')
     onRecodeListChanged() {
-      window.localStorage.setItem('recodeList', JSON.stringify(this.recodeList));
+      model.save(this.recodeList);
     }
   }
 </script>
