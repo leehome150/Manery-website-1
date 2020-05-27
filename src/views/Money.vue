@@ -1,6 +1,5 @@
 <template>
     <Layout class-prefix="layout">
-        {{recode}}
         <NumberPad @update:value="onUpdateAmount" @submit="saveRecode"/>
         <Types :value.sync="recode.type"/>
         <Notes @update:value="onUpdateNotes"/>
@@ -21,13 +20,14 @@
     notes: string;
     type: string;
     amount: number;
+    createAt?: Date;//类
   }
 
   @Component({components: {Tags, Notes, Types, NumberPad}})
   export default class Money extends Vue {
 
     tags = ['衣', '食', '住', '行', '娱乐'];
-    recodeList: Record[] = [];
+    recodeList: Record[] = JSON.parse(window.localStorage.getItem('recodeList') || '[]');
     recode: Record = {
       tags: [], notes: '', type: '-', amount: 0
     };
@@ -45,13 +45,14 @@
     }
 
     saveRecode() {
-      const recode2=JSON.parse(JSON.stringify(this.recode))
-      this.recodeList.push(recode2)
-      console.log(this.recodeList);
+      const recode2: Record = JSON.parse(JSON.stringify(this.recode));
+      recode2.createAt = new Date();
+      this.recodeList.push(recode2);
     }
+
     @Watch('recodeList')
-    onRecodeListChanged(){
-      localStorage.setItem('recodeList',JSON.stringify(this.recodeList))
+    onRecodeListChanged() {
+      window.localStorage.setItem('recodeList', JSON.stringify(this.recodeList));
     }
   }
 </script>
