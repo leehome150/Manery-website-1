@@ -14,15 +14,18 @@
   import Notes from '@/components/Money/Notes.vue';
   import Tags from '@/components/Money/Tags.vue';
   import {Component, Watch} from 'vue-property-decorator';
-  import model from '@/model';
+  import model from '@/models/model';
+  import tagListModel from '@/models/tagListModel';
 
+  const recodeList = model.fetch();
+  const tagList =tagListModel.fetch()
 
 
   @Component({components: {Tags, Notes, Types, NumberPad}})
   export default class Money extends Vue {
 
-    tags = ['衣', '食', '住', '行', '娱乐'];
-    recodeList = model.fetch();
+    tags = tagList;
+    recodeList = recodeList;
     recode: RecordItem = {
       tags: [], notes: '', type: '-', amount: 0
     };
