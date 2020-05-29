@@ -1,14 +1,16 @@
 <template>
     <layout>
         <div class="navBar">
-            <icon class="leftIcon" name="left"/>
+            <icon class="leftIcon" name="left" @click="goBack"/>
             <span class="title">编辑标签</span>
             <span class="rightIcon"></span>
         </div>
         <div class="form-wrapper">
-            <FormItem :value="tag.name" field-name="标签名" placeholder="请输入标签名"/>
+            <FormItem :value="tag.name"
+                      @update:value="update"
+                      field-name="标签名" placeholder="请输入标签名"/>
         </div>
-        <Button>删除标签</Button>
+        <Button @click="remove">删除标签</Button>
     </layout>
 </template>
 
@@ -38,6 +40,22 @@
       }
     }
 
+    update(name: string) {
+      if (this.tag) {
+        tagListModel.update(this.tag.id, name);
+      }
+
+    }
+
+    remove() {
+      if (this.tag) {
+        tagListModel.remove(this.tag.id);
+      }
+    }
+
+    goBack() {
+      this.$router.back();
+    }
   }
 </script>
 

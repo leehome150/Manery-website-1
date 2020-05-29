@@ -44,6 +44,7 @@
     .tags {
         background: white;
         font-size: 16px;
+        padding-left: 16px;
 
         > .tag {
             min-height: 44px;
