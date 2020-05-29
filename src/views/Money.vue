@@ -1,4 +1,5 @@
 <template>
+
     <Layout class-prefix="layout">
         <NumberPad @update:value="onUpdateAmount" @submit="saveRecode"/>
         <Types :value.sync="recode.type"/>
@@ -62,7 +63,8 @@
         display: flex;
         flex-direction: column-reverse;
     }
-    .notes{
+
+    .notes {
         padding: 12px 0;
     }
 </style>
