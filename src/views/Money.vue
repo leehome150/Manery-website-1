@@ -1,8 +1,8 @@
 <template>
 
     <Layout class-prefix="layout">
-        <NumberPad @update:value="onUpdateAmount" @submit="saveRecode"/>
-        <Types :value.sync="recode.type"/>
+        <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
+        <Types :value.sync="record.type"/>
         <div class="notes">
             <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="在这里输入备注"/>
 
@@ -17,41 +17,34 @@
   import Types from '@/components/Money/Types.vue';
   import FormItem from '@/components/Money/FormItem.vue';
   import Tags from '@/components/Money/Tags.vue';
-  import {Component, Watch} from 'vue-property-decorator';
-  import model from '@/models/model';
-
-  const recodeList = model.fetch();
+  import {Component} from 'vue-property-decorator';
 
 
   @Component({components: {Tags, FormItem, Types, NumberPad}})
   export default class Money extends Vue {
 
     tags = window.tagList;
-    recodeList = recodeList;
-    recode: RecordItem = {
+    recordList = window.recordList;
+    record: RecordItem = {
       tags: [], notes: '', type: '-', amount: 0
     };
 
     onUpdateTags(value: string[]) {
-      this.recode.tags = value;
+      this.record.tags = value;
     }
 
     onUpdateNotes(value: string) {
-      this.recode.notes = value;
+      this.record.notes = value;
     }
 
     onUpdateAmount(value: string) {
-      this.recode.amount = parseFloat(value);
+      this.record.amount = parseFloat(value);
     }
 
-    saveRecode() {
-      model.create(this.recode);
+    saveRecord() {
+      window.createRecord(this.record);
     }
 
-    @Watch('recodeList')
-    onRecodeListChanged() {
-      model.save();
-    }
   }
 </script>
 <style lang="scss">
