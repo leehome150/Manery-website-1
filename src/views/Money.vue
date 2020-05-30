@@ -17,7 +17,7 @@
   import Types from '@/components/Money/Types.vue';
   import FormItem from '@/components/Money/FormItem.vue';
   import Tags from '@/components/Money/Tags.vue';
-  import {Component, Watch} from 'vue-property-decorator';
+  import {Component, Model, Watch} from 'vue-property-decorator';
   import model from '@/models/model';
   import tagListModel from '@/models/tagListModel';
 
@@ -47,14 +47,12 @@
     }
 
     saveRecode() {
-      const recode2: RecordItem = model.clone(this.recode);
-      recode2.createAt = new Date();
-      this.recodeList.push(recode2);
+      model.create(this.recode);
     }
 
     @Watch('recodeList')
     onRecodeListChanged() {
-      model.save(this.recodeList);
+      model.save();
     }
   }
 </script>
