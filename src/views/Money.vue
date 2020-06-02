@@ -7,7 +7,7 @@
             <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="在这里输入备注"/>
 
         </div>
-        <Tags/>
+        <Tags @update:value="onUpdateTags"/>
     </Layout>
 </template>
 
@@ -22,7 +22,7 @@
 
 
   @Component({
-    components: {Tabs, Tags, FormItem,NumberPad},
+    components: {Tabs, Tags, FormItem, NumberPad},
   })
   export default class Money extends Vue {
 
@@ -38,6 +38,10 @@
 
     created() {
       this.$store.commit('fetchRecords');
+    }
+
+    onUpdateTags(value: Tag[]) {
+      this.record.tags = value;
     }
 
     onUpdateNotes(value: string) {
