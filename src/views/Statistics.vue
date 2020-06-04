@@ -1,8 +1,9 @@
 <template>
     <Layout>
         <tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-        <ol>
-            <li v-for="(group, index) in groupList" :key="index"><h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
+        <ol v-if="groupList.length>0">
+            <li v-for="(group, index) in groupList" :key="index"><h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span>
+            </h3>
                 <ol>
                     <li v-for="item in group.items" :key="item.id" class="record">
                         <span>{{tagString(item.tags)}}</span>
@@ -12,6 +13,9 @@
                 </ol>
             </li>
         </ol>
+        <div v-else class="noResult">
+            目前没有相关记录
+        </div>
     </Layout>
 </template>
 
@@ -32,7 +36,7 @@
     recordTypeList = recordTypeList;
 
     tagString(tags: Tag[]) {
-      return tags.length === 0 ? '无' : tags.map(t=>t.name).join(',');
+      return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
     }
 
     beautify(string: string) {
@@ -61,10 +65,11 @@
         return [];
       }
 
-      const newList = clone(recordList).filter(r=>r.type===this.type)
+      const newList = clone(recordList).filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
-      type Result ={ title: string;total?: number;items: RecordItem[]}[]
-      const result: Result= [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+      if (newList.length === 0) {return [];}
+      type Result = { title: string; total?: number; items: RecordItem[] }[]
+      const result: Result = [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]]}];
       for (let i = 1; i < newList.length; i++) {
         const current = newList[i];
         const last = result[result.length - 1];
@@ -74,9 +79,9 @@
           result.push({title: dayjs(recordList[0].createAt).format('YYYY-MM-DD'), items: [current]});
         }
       }
-      result.forEach(group=>{
-        group.total=group.items.reduce((sum,item)=>sum+item.amount,0)
-      })
+      result.forEach(group => {
+        group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
+      });
       return result;
     }
 
@@ -127,5 +132,10 @@
         margin-right: auto;
         margin-left: 16px;
         color: #999;
+    }
+
+    .noResult {
+        padding: 16px;
+        text-align: center;
     }
 </style>

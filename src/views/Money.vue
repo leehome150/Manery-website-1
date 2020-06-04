@@ -4,10 +4,11 @@
         <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
         <tabs :data-source="recordTypeList" :value.sync="record.type"/>
         <div class="notes">
-            <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="在这里输入备注"/>
+            <FormItem :value.sync="record.notes"
+                      field-name="备注" placeholder="在这里输入备注"/>
 
         </div>
-        <Tags @update:value="onUpdateTags"/>
+        <Tags :value.sync="record.tags"/>
     </Layout>
 </template>
 
@@ -40,22 +41,22 @@
       this.$store.commit('fetchRecords');
     }
 
-    onUpdateTags(value: Tag[]) {
-      this.record.tags = value;
-    }
-
-    onUpdateNotes(value: string) {
-      this.record.notes = value;
-    }
-
     onUpdateAmount(value: string) {
       this.record.amount = parseFloat(value);
     }
 
     saveRecord() {
+      if (!this.record.tags || this.record.tags.length === 0) {
+        return window.alert('请选择至少一个标签');
+      }
       this.$store.commit('createRecord', this.record);
-    }
+      if (this.$store.state.createRecordError === null) {
+        window.alert('已保存');
+        this.record.notes = '';
+        this.record.tags = [];
 
+      }
+    }
   }
 </script>
 <style lang="scss">
