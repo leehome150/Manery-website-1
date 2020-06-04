@@ -41,7 +41,9 @@
     create() {
       const name = window.prompt('请输入标签名');
       if (!name) {
-        return window.alert('标签名不能为空');
+        return setTimeout(function () {
+          window.alert('标签名不能为空');
+        }, 0);
       }
       this.$store.commit('createTag', name);
     }
