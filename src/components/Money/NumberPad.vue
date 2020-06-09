@@ -79,9 +79,9 @@
             @extend %innerShadow;
             font-size: 36px;
             font-family: Consolas, monospace;
-            padding: 9px 16px;
+            padding: 4px 16px;
             text-align: right;
-            height: 72px;
+            height: 64px;
         }
 
         .buttons {
@@ -89,13 +89,13 @@
 
             > button {
                 width: 25%;
-                height: 64px;
+                height: 48px;
                 float: left;
                 background: transparent;
                 border: none;
 
                 &.ok {
-                    height: 64*2px;
+                    height: 48*2px;
                     float: right;
                 }
 

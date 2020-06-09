@@ -1,5 +1,6 @@
 <template>
     <Layout>
+        <MyIcon/>
         <tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
         <ol v-if="groupList.length>0">
             <li v-for="(group, index) in groupList" :key="index"><h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span>
@@ -26,9 +27,10 @@
   import recordTypeList from '@/constants/recordTypeList';
   import dayjs from 'dayjs';
   import clone from '@/lib/clone';
+  import MyIcon from '@/views/MyIcon.vue';
 
   @Component({
-    components: {Tabs}
+    components: {MyIcon, Tabs}
   })
   export default class Statistics extends Vue {
 
@@ -95,6 +97,7 @@
 <style lang="scss" scoped>
     ::v-deep .type-tabs-item {
         background: #c4c4c4;
+        line-height: 48px;
 
         &.selected {
             background: white;

@@ -1,5 +1,6 @@
 <template>
     <Layout>
+        <MyIcon/>
         <div class="tags">
             <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
                 <span>{{tag.name}}</span>
@@ -18,15 +19,17 @@
   import Button from '@/components/Button.vue';
   import {mixins} from 'vue-class-component';
   import TagHelper from '@/mixins/TagHelper';
+  import MyIcon from '@/views/MyIcon.vue';
 
 
   @Component({
-    components: {Button},
+    components: {MyIcon, Button},
   })
   export default class Labels extends mixins(TagHelper) {
-    get tags(){
+    get tags() {
       return this.$store.state.tagList;
     }
+
     created() {
       this.$store.commit('fetchTags');
     }

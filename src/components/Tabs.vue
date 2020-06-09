@@ -44,14 +44,14 @@
 
 <style lang="scss" scoped>
     .tabs {
-        background: #C4C4C4;
+        background: #f5f5f5;
         display: flex;
         text-align: center;
         font-size: 24px;
 
         &-item {
             width: 50%;
-            line-height: 64px;
+            line-height: 48px;
             display: flex;
             justify-content: center;
             align-content: center;
