@@ -61,10 +61,12 @@
                 content: '';
                 position: absolute;
                 bottom: 0;
-                left: 0;
-                width: 100%;
+                left: 50%;
+                transform: translate(-50%);
+                width: 80px;
                 height: 4px;
                 background: #333;
+
             }
         }
     }

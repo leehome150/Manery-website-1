@@ -68,8 +68,10 @@
                 line-height: 24px;
                 border-radius: 12px;
                 padding: 0 16px;
-                margin-right: 12px;
                 margin-top: 4px;
+                &:not(:last-child){
+                    margin-right: 10.7px;
+                }
 
                 &.selected {
                     background: darken($bg, 50%);
