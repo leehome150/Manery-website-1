@@ -2,6 +2,9 @@ import Vue from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import MuseUI from "muse-ui";
+import "muse-ui/dist/muse-ui.css";
 import router from "./router";
 import store from "./store";
 import Nav from "@/components/Nav.vue";
@@ -10,6 +13,7 @@ import Icon from "@/components/Icon.vue";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+Vue.use(MuseUI);
 Vue.component("Nav", Nav);
 Vue.component("Layout", Layout);
 Vue.component("Icon", Icon);
